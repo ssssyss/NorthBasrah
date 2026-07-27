@@ -8168,13 +8168,13 @@ svg text::selection,svg tspan::selection{background-color: #4285f4;color: #fffff
             <tspan style="white-space:pre" y="46" textLength="234" x="96" class="st6">بترو (12) نجمي</tspan>
         </text>
     </g>
-    <g id="1088" ed:parentid="706" ed:width="453.32" ed:height="62" transform="matrix(1,0,0,1,6197.21,5930.25)" ed:layout="rightmap">
-        <path d="M8,0L401.9,0C407.3,0,412.1,1.5,416.4,4.6L446.8,26.4C451.2,29.5,451.2,32.5,446.8,35.6L416.4,57.2C412.1,60.3,407.3,61.8,401.9,61.8L8,62C2.6,62,0,59.4,0,54L0,8C0,2.6,2.6,0,8,0z" stroke="#18acff" stroke-linejoin="round" fill="none" stroke-width="4"/>
-        <text class="st5">
-            <tspan style="white-space:pre" y="46" textLength="145" x="140" class="st6">بترو (11)</tspan>
-        </text>
-    </g>
-    <g id="1090" ed:parentid="706" ed:width="453.32" ed:height="62" transform="matrix(1,0,0,1,6197.21,6009.25)" ed:layout="rightmap">
+<g id="1088" data-tooltip="بترو (11)\n حمل المغذي : 30 امبير \n عدد محولات 100 : 3 \n عدد محولات 250 : 14 \n عدد محولات 400 : 0 \n عدد محولات 630 : 0 \n عدد محولات 1000 : 0 \n طول المغذ الهوائي : 0 \n طول المغذ الارضي : 3.5 " ed:parentid="706" ed:width="453.32" ed:height="62" transform="matrix(1,0,0,1,6197.21,5930.25)" ed:layout="rightmap" style="cursor: pointer;">
+    <path d="M8,0L401.9,0C407.3,0,412.1,1.5,416.4,4.6L446.8,26.4C451.2,29.5,451.2,32.5,446.8,35.6L416.4,57.2C412.1,60.3,407.3,61.8,401.9,61.8L8,62C2.6,62,0,59.4,0,54L0,8C0,2.6,2.6,0,8,0z" stroke="#18acff" stroke-linejoin="round" fill="none" stroke-width="4"/>
+    <text class="st5">
+        <tspan style="white-space:pre" y="46" textLength="145" x="140" class="st6">بترو (11)</tspan>
+    </text>
+</g>
+    <g data-tooltip="بترو (6) كرفانية\n حمل المغذي : 145 \n عدد محولات 100 : 3 \n عدد محولات 250 : 15 \n عدد محولات 400 : 4 \n عدد محولات 630 : 1 \n عدد محولات 1000 : 0 \n طول المغذ الهوائي : 10 \n طول المغذ الارضي : 0.15 " id="1090" ed:parentid="706" ed:width="453.32" ed:height="62" transform="matrix(1,0,0,1,6197.21,6009.25)" ed:layout="rightmap">
         <path d="M8,0L401.9,0C407.3,0,412.1,1.5,416.4,4.6L446.8,26.4C451.2,29.5,451.2,32.5,446.8,35.6L416.4,57.2C412.1,60.3,407.3,61.8,401.9,61.8L8,62C2.6,62,0,59.4,0,54L0,8C0,2.6,2.6,0,8,0z" stroke="#18acff" stroke-linejoin="round" fill="none" stroke-width="4"/>
         <text class="st5">
             <tspan style="white-space:pre" y="46" textLength="234" x="96" class="st6">بترو (6) كرفانية</tspan>
@@ -8183,7 +8183,8 @@ svg text::selection,svg tspan::selection{background-color: #4285f4;color: #fffff
 
 </svg>
 </div>
-
+<!--  هذا المربع المباشر  لتظهر فيه الملاحظة -->
+<div id="svg-tooltip"></div>
 <!-- المكتبات المطلوبة (التحريك والزوم + دعم إيماءات اللمس بالأصابع) -->
 <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
@@ -8245,6 +8246,36 @@ svg text::selection,svg tspan::selection{background-color: #4285f4;color: #fffff
   .map-controls button:active {
     transform: translateY(0);
   }
+  /* 1. تأثير التأشير على العنصر (الخلفية أزرق والخط أسود) */
+g[data-tooltip]:hover path {
+    fill: #18acff !important;   /* لون العنصر يصير أزرق */
+    stroke: #0072bb !important;
+}
+
+g[data-tooltip]:hover tspan,
+g[data-tooltip]:hover text {
+    fill: #000000 !important;   /* لون الخط يصير أسود */
+}
+
+#svg-tooltip {
+    position: fixed;
+    background-color: #ffffff;
+    color: #000000;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 20px;
+    font-weight: bold;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
+    border: 2px solid #18acff;
+    pointer-events: none;
+    display: none;
+    z-index: 9999;
+    font-family: sans-serif;
+
+    /* 👇 هذا السطر هو الذي يحل المشكلة ويعمل سطر جديد */
+    white-space: pre-line; 
+    text-align: center; /* اختياري: لتوسيط الأسطر */
+}
 </style>
 
 <!-- كود التشغيل والربط -->
@@ -8321,4 +8352,21 @@ svg text::selection,svg tspan::selection{background-color: #4285f4;color: #fffff
       panZoom.center();
     });
   });
+const tooltip = document.getElementById('svg-tooltip');
+
+    document.querySelectorAll('g[data-tooltip]').forEach(item => {
+        item.addEventListener('mousemove', (e) => {
+            // تحويل \n إلى سطر جديد حقيقي
+            let text = item.getAttribute('data-tooltip').replace(/\\n/g, '\n');
+            
+            tooltip.innerText = text;
+            tooltip.style.display = 'block';
+            tooltip.style.left = (e.clientX + 15) + 'px';
+            tooltip.style.top = (e.clientY - 35) + 'px';
+        });
+
+        item.addEventListener('mouseleave', () => {
+            tooltip.style.display = 'none';
+        });
+    })
 </script>
